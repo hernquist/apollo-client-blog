@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import ApolloClient from 'apollo-boost';
-import { ApolloProvider, Query } from 'react-apollo';
-import { POSTS_QUERY } from './graphql/queries';
+import { ApolloProvider } from 'react-apollo';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import Post from './Posts/Post';
+import Posts from './Posts/Posts'
 import './App.css';
 
 const client = new ApolloClient({
@@ -18,21 +20,22 @@ const client = new ApolloClient({
 class App extends Component {
   render() {
     return (
-      <ApolloProvider client={client}>
-        <div className="App">
-          <header className="App-header">
-            <h1 className="App-title">React-Apollo-GraphQL-GraphCMS</h1>
-          </header>
-          <Query query={POSTS_QUERY}>
-            {({loading, data}) => {
-              if (loading) return "Loading ...";
-              const { posts } = data;
-              
-              return posts.map(post => <h1 key={post.id}>{post.title}</h1>)
-            }}
-          </Query> 
-        </div>
-      </ApolloProvider>
+      <Router>
+        <ApolloProvider client={client}>
+          <div className="App">
+            <header className="App-header">
+              <h1 className="App-title">React-Apollo-GraphQL-GraphCMS</h1>
+            </header>
+
+            <Switch>
+              <Route exact path="/" component={Posts} />
+              <Route path="/post/:id" component={Post} />
+            </Switch>
+          
+
+          </div>
+        </ApolloProvider>
+      </Router>
     );
   }
 }
