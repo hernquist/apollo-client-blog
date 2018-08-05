@@ -28,16 +28,16 @@ class App extends Component {
               <h1 className="App-title">React-Apollo-GraphQL-GraphCMS</h1>
               <Link to='/'>HOME</Link>
               {' '}
-              <Link to='/post/new'>NEW POST</Link>
+              
             </header>
-
-
-            <Switch>
-              <Route exact path="/" component={Posts} />
-              <Route path="/post/new" component={NewPost} />
-              <Route path="/post/:id" component={Post} />
-            </Switch>
-          
+            
+            <main>
+              <Switch>
+                <Route exact path="/" component={Posts} />
+                <Route path="/post/new" component={NewPost} />
+                <Route path="/post/:id" component={Post} />
+              </Switch>
+            </main>
 
           </div>
         </ApolloProvider>
