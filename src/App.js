@@ -27,7 +27,10 @@ class App extends Component {
             <header className="App-header">
               <h1 className="App-title">React-Apollo-GraphQL-GraphCMS</h1>
               <Link to='/'>HOME</Link>
+              {' '}
+              <Link to='/post/new'>NEW POST</Link>
             </header>
+
 
             <Switch>
               <Route exact path="/" component={Posts} />

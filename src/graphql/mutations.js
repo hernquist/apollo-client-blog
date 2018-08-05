@@ -1,11 +1,11 @@
 import gql from 'graphql-tag';
 
 export const ADD_POST = gql`
-mutation addPost {
+mutation addPost($title: String!, $body: String!) {
   createPost(data: {
-    status:PUBLISHED
-    title: "mutation added"
-    body: "here a mutation from graphCMS"
+    status: PUBLISHED
+    title: $title
+    body: $body
   })
   {
     title
