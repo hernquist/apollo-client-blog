@@ -3,13 +3,18 @@ import PropTypes from 'prop-types';
 
 export default class PostForm extends Component {
   static propTypes = {
-    onSubmit: PropTypes.func.isRequired
+    onSubmit: PropTypes.func.isRequired,
+    post: PropTypes.object,
+  }
+
+  static defaultProps = {
+    post: {}
   }
 
   state = {
-    title: "",
-    body: "",
-    status: "PUBLISHED"
+    id: this.props.post.id || null,
+    title: this.props.post.title || "",
+    body: this.props.post.body || "",
   }
 
   handleEvent = e => {
@@ -24,9 +29,11 @@ export default class PostForm extends Component {
   })
 
   render() {
-    const { onSubmit } = this.props;
-    const { title, body } = this.state;
+    const { onSubmit} = this.props;
+    const { title, body, id } = this.state;
 
+    // this is reusable, if there is no idea NEW_POST doesn't care about id variable
+    // it just ignores it
     return (
       <form 
         onSubmit={e => {
@@ -34,10 +41,11 @@ export default class PostForm extends Component {
           onSubmit({
             variables: {
               title,
-              body
+              body,
+              id
             }
           })
-            .then(() => this.resetState())
+            .then(() => !id && this.resetState())
             .catch(err => console.log(err))
         }}
       >

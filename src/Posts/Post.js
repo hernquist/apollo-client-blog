@@ -27,10 +27,7 @@ export default class Post extends Component {
               </section>
               <section>
                 <h3>Edit Post</h3>
-                <UpdatePost 
-                  onSubmit={()=>console.log('submit')}
-                  id={post.id}
-                />
+                <UpdatePost post={post} />
               </section>
             </div>
           )

@@ -16,14 +16,10 @@ mutation addPost($title: String!, $body: String!) {
 `;
 
 export const UPDATE_POST = gql`
-mutation updatePost($id: ID!, title$: String!, $body: String! ) {
+mutation updatePost($id: ID!, $title: String!, $body: String! ) {
   updatePost(
-    where: {id: $ID}, 
-    data: {
-      status: PUBLISHED, 
-      title: $title, 
-      body: $body
-    }
+    where: {id: $id}, 
+    data: {status: PUBLISHED, title: $title, body: $body}
   ) {
     title
     body
