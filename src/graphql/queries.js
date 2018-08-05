@@ -2,7 +2,7 @@ import gql from 'graphql-tag';
 
 export const POSTS_QUERY = gql`
   query allPosts {
-    posts {
+    postz {
       id
       title
       body
