@@ -14,7 +14,8 @@ import './App.css';
 const client = new ApolloClient({
   uri: 'https://api-useast.graphcms.com/v1/cjkg8z3wf0jan01fhumzt7z56/master',
   clientState: {
-    defaults: defaultState
+    defaults: defaultState,
+    resolvers: {}
   }
 })
 

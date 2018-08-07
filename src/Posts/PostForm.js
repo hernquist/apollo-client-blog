@@ -4,11 +4,13 @@ import PropTypes from 'prop-types';
 export default class PostForm extends Component {
   static propTypes = {
     onSubmit: PropTypes.func.isRequired,
+    onSuccess: PropTypes.func,
     post: PropTypes.object,
   }
 
   static defaultProps = {
-    post: {}
+    post: {},
+    onSuccess: () => null
   }
 
   state = {
@@ -29,7 +31,7 @@ export default class PostForm extends Component {
   })
 
   render() {
-    const { onSubmit} = this.props;
+    const { onSubmit, onSuccess } = this.props;
     const { title, body, id } = this.state;
 
     // this is reusable... if there is no id, NEW_POST doesn't care about id variable
@@ -45,7 +47,9 @@ export default class PostForm extends Component {
               id
             }
           })
-            .then(() => !id && this.resetState())
+            .then(() => {
+              onSuccess();
+            })
             .catch(err => console.log(err))
         }}
       >

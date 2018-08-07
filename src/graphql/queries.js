@@ -18,11 +18,12 @@ export const POST_QUERY = gql`
       title
       body
     }
+    isEditMode @client
   }
 `;
 
-export const IS_EDIT_MODE = gql`
-{
-  isEditMode @client
-}
-`;
+// export const IS_EDIT_MODE = gql`
+// {
+//   isEditMode @client
+// }
+// `;
