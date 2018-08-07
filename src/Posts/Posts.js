@@ -8,7 +8,7 @@ export default class Posts extends Component {
     return (
       <div>
         <Link className="button" to='/post/new'>NEW POST</Link>
-        <ul className="posts-listing">
+        <ol className="posts-listing">
           <Query query={POSTS_QUERY}>
             {({ loading, data }) => {
               if (loading) return "Loading ...";
@@ -25,7 +25,7 @@ export default class Posts extends Component {
               ));
             }}
           </Query>
-        </ul>
+        </ol>
       </div>
     )
   }
