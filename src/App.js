@@ -7,8 +7,15 @@ import Posts from './Posts/Posts';
 import NewPost from './Posts/NewPost';
 import './App.css';
 
+ const defaultState = {
+   isEditMode: false
+ } 
+
 const client = new ApolloClient({
-  uri: 'https://api-useast.graphcms.com/v1/cjkg8z3wf0jan01fhumzt7z56/master'
+  uri: 'https://api-useast.graphcms.com/v1/cjkg8z3wf0jan01fhumzt7z56/master',
+  clientState: {
+    defaults: defaultState
+  }
 })
 
 // Using the client and a query outside of react
@@ -27,8 +34,6 @@ class App extends Component {
             <header className="App-header">
               <h1 className="App-title">React-Apollo-GraphQL-GraphCMS</h1>
               <Link to='/'>HOME</Link>
-              {' '}
-              
             </header>
             
             <main>
@@ -38,7 +43,6 @@ class App extends Component {
                 <Route path="/post/:id" component={Post} />
               </Switch>
             </main>
-
           </div>
         </ApolloProvider>
       </Router>

@@ -47,6 +47,24 @@ main {
 .posts-listing li {
   margin-bottom: 2rem;
   font-size: 1.6rem;
-  
-
 }
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+input, textarea {
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+input {
+  font-size: 1.6rem;
+}
+
+textarea {
+  font-size: 1.2rem;
+  height: 50vh;
+}
+

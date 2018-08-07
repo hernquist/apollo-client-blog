@@ -20,3 +20,9 @@ export const POST_QUERY = gql`
     }
   }
 `;
+
+export const IS_EDIT_MODE = gql`
+{
+  isEditMode @client
+}
+`;

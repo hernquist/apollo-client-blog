@@ -32,7 +32,7 @@ export default class PostForm extends Component {
     const { onSubmit} = this.props;
     const { title, body, id } = this.state;
 
-    // this is reusable, if there is no idea NEW_POST doesn't care about id variable
+    // this is reusable... if there is no id, NEW_POST doesn't care about id variable
     // it just ignores it
     return (
       <form 
@@ -63,7 +63,7 @@ export default class PostForm extends Component {
           placeholder="body"
           name="body"
         />
-        <button>Submit</button>
+        <button className="button">Submit</button>
       </form>
     )
   }
