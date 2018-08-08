@@ -1,8 +1,8 @@
 import gql from 'graphql-tag';
 
 export const POSTS_QUERY = gql`
-  query allPosts {
-    posts (orderBy: createdAt_DESC, first: 10) {
+  query allPosts($skip: Int) {
+    posts (orderBy: createdAt_DESC, first: 6, skip: $skip) {
       id
       title
       body
@@ -17,6 +17,7 @@ export const POST_QUERY = gql`
       id
       title
       body
+      check
     }
     isEditMode @client
   }

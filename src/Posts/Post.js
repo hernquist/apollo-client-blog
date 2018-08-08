@@ -30,6 +30,7 @@ export default class Post extends Component {
               : (
                 <section>
                   <h3>{post.title}</h3>
+                  <input type="checkbox>" />
                   <div dangerouslySetInnerHTML={{ __html: post.body }} />
                 </section>
               )}
