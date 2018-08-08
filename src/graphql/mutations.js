@@ -26,4 +26,4 @@ mutation updatePost($id: ID!, $title: String!, $body: String! ) {
     id
   }
 }
-`
+`;

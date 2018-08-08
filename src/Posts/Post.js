@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { POST_QUERY } from '../graphql/queries';
-import { Query} from 'react-apollo';
+import { Query, Mutation } from 'react-apollo';
 import UpdatePost from './UpdatePost';
 import EditMode from './EditMode';
+import gql from 'graphql-tag';
 
 
 export default class Post extends Component {
@@ -18,6 +19,8 @@ export default class Post extends Component {
         {({ loading, data }) => {
           if (loading) return "Loading ...";
           const { post, isEditMode } = data;
+          console.log(post);
+          const check = !post.check;
           
           return ( 
             <div>
@@ -30,7 +33,45 @@ export default class Post extends Component {
               : (
                 <section>
                   <h3>{post.title}</h3>
-                  <input type="checkbox>" />
+                  <Mutation
+                    mutation={TOGGLE_POST}
+                    variables={{
+                      id: post.id,
+                      check: !post.check
+                    }}
+                    optimisticResponse={{
+                      __typename: 'Mutation',
+                      updatePost: {
+                        __typename: 'Post',
+                        check: !post.check
+                      }
+                    }}
+                    update={(cache, {data: { updatePost }}) => {
+                      const data = cache.readQuery({
+                        query: POST_QUERY,
+                        variables: {
+                          id: post.id
+                        }
+                      });
+                      data.post.check = updatePost.check;
+                      cache.writeQuery({
+                        query: POST_QUERY,
+                        data: {
+                          ...data,
+                          post: data.post
+                        }
+                      })
+                    }}
+                  >
+                    {updatePost => (
+                      <input
+                        style={{ height: '80px' }}
+                        type="checkbox" 
+                        checked={post.check} 
+                        onChange={updatePost}
+                      />
+                    )}
+                  </Mutation>
                   <div dangerouslySetInnerHTML={{ __html: post.body }} />
                 </section>
               )}
@@ -42,3 +83,14 @@ export default class Post extends Component {
     )
   }
 }
+
+const TOGGLE_POST = gql`
+mutation togglePost($check: Boolean, $id: ID) {
+  updatePost(
+    where: {id: $id},
+    data: {check: $check} 
+  ) {
+    check
+  }
+}
+`
