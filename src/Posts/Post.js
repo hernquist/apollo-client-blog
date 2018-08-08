@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { POST_QUERY } from '../graphql/queries';
+import { TOGGLE_POST } from '../graphql/mutations';
 import { Query, Mutation } from 'react-apollo';
 import UpdatePost from './UpdatePost';
 import EditMode from './EditMode';
-import gql from 'graphql-tag';
 
 
 export default class Post extends Component {
@@ -37,13 +37,13 @@ export default class Post extends Component {
                     mutation={TOGGLE_POST}
                     variables={{
                       id: post.id,
-                      check: !post.check
+                      check
                     }}
                     optimisticResponse={{
                       __typename: 'Mutation',
                       updatePost: {
                         __typename: 'Post',
-                        check: !post.check
+                        check
                       }
                     }}
                     update={(cache, {data: { updatePost }}) => {
@@ -84,13 +84,3 @@ export default class Post extends Component {
   }
 }
 
-const TOGGLE_POST = gql`
-mutation togglePost($check: Boolean, $id: ID) {
-  updatePost(
-    where: {id: $id},
-    data: {check: $check} 
-  ) {
-    check
-  }
-}
-`

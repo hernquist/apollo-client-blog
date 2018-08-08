@@ -27,3 +27,14 @@ mutation updatePost($id: ID!, $title: String!, $body: String! ) {
   }
 }
 `;
+
+export const TOGGLE_POST = gql`
+mutation togglePost($check: Boolean, $id: ID) {
+  updatePost(
+    where: {id: $id},
+    data: {check: $check} 
+  ) {
+    check
+  }
+}
+` 
